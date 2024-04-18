@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
+#include <cctype> // For std::tolower
 
-using namespace std;                                                                    //here is my programming from 5.4, i think it still works
+using namespace std;
 
 // Function to double a digit and sum its individual digits
 int doubleAndSum(int digit) {
@@ -10,7 +11,7 @@ int doubleAndSum(int digit) {
 }
 
 // Function to verify the credit card number
-bool verifyCreditCard(const string& cardNumber) {
+bool isCardValid(const string& cardNumber) {
     int sum1 = 0;
     int sum2 = 0;
 
@@ -35,16 +36,40 @@ bool verifyCreditCard(const string& cardNumber) {
     return (totalSum % 10 == 0);
 }
 
+// Function to check if a string contains only numeric characters
+bool isNumeric(const string& s) {
+    for (char c : s) {
+        if (!isdigit(c)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Function to check if a string is of the correct length (16 characters)
+bool isCorrectLength(const string& s) {
+    return s.length() == 16;
+}
+
 int main() {
     string cardNumber;
-    cout << "Enter the credit card number: ";
-    cin >> cardNumber;
+    while (true) {
+        cout << "Enter 16-digit credit card # or Q to quit: ";
+        cin >> cardNumber;
 
-    if (verifyCreditCard(cardNumber)) {
-        cout << "The credit card number is valid." << endl;
-    }
-    else {
-        cout << "The credit card number is invalid." << endl;
+        // Convert input to lowercase
+        char firstChar = tolower(cardNumber[0]);
+
+        if (firstChar == 'q') {
+            // Quit the program if user inputs 'Q' or 'q'                           // test 1 of code
+            break;
+        }
+
+        if (!isCorrectLength(cardNumber)) {
+            cout << "Error - card number must contain 16 digits." << endl;
+            continue;
+        }
+
     }
 
     return 0;
