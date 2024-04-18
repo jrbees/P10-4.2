@@ -61,7 +61,7 @@ int main() {
         char firstChar = tolower(cardNumber[0]);
 
         if (firstChar == 'q') {
-            // Quit the program if user inputs 'Q' or 'q'                           // test 1 of code
+            // Quit the program if user inputs 'Q' or 'q'                             // test 1
             break;
         }
 
@@ -70,6 +70,18 @@ int main() {
             continue;
         }
 
+        if (!isNumeric(cardNumber)) {
+            cout << "Error - card number must contain only digits." << endl;
+            continue;
+        }
+
+        // Check if the card number is valid
+        if (isCardValid(cardNumber)) {                                     // back to using is valid or is noto as well. 
+            cout << "Card is valid." << endl;
+        }
+        else {
+            cout << "Card is not valid." << endl;
+        }
     }
 
     return 0;
